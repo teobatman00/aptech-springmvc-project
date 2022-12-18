@@ -5,6 +5,7 @@ import org.example.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    public String saveBook(@ModelAttribute("book") BookEntity book) {
+    public String saveBook(@Validated @ModelAttribute("book") BookEntity book) {
         bookService.saveBook(book);
         return "redirect:/book/list";
     }

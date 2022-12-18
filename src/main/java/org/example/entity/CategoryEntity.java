@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -15,8 +16,10 @@ public class CategoryEntity {
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "name", nullable = false)
+    @NotNull
     private String name;
     @Column(name = "description")
+    @NotNull
     private String description;
     @CreationTimestamp
     @Column(name = "created_date", nullable = false)

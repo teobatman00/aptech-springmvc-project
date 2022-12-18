@@ -6,6 +6,7 @@ import org.example.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +45,7 @@ public class CategoryController {
     }
 
     @PostMapping("/save")
-    public String saveCategory(@ModelAttribute("category") CategoryEntity category) {
+    public String saveCategory(@Validated @ModelAttribute("category") CategoryEntity category) {
         categoryService.saveCategory(category);
         return "redirect:/category/list";
     }
