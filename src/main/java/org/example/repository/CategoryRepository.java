@@ -1,4 +1,6 @@
 package org.example.repository;
 
-public interface CategoryRepository {
+import org.example.entity.CategoryEntity;
+
+public interface CategoryRepository extends BaseRepository<CategoryEntity, Long> {
 }

@@ -1,4 +1,6 @@
 package org.example.repository;
 
-public interface BookRepository {
+import org.example.entity.BookEntity;
+
+public interface BookRepository extends BaseRepository<BookEntity, Long> {
 }
