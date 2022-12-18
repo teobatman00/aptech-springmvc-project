@@ -1,4 +1,4 @@
 package org.example.repository;
 
-public interface BookRepository {
+public interface RoleRepository {
 }
