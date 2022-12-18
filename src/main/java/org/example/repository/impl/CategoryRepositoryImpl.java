@@ -3,6 +3,7 @@ package org.example.repository.impl;
 import org.example.entity.CategoryEntity;
 import org.example.repository.CategoryRepository;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +19,8 @@ public class CategoryRepositoryImpl extends BaseRepositoryImpl implements Catego
 
     @Override
     public List<CategoryEntity> getList() {
-        return null;
+        Query<CategoryEntity> query = currentSession.createQuery("from CategoryEntity order by id desc", CategoryEntity.class);
+        return query.getResultList();
     }
 
     @Override

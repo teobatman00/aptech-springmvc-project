@@ -3,6 +3,7 @@ package org.example.repository.impl;
 import org.example.entity.BookEntity;
 import org.example.repository.BookRepository;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +19,8 @@ public class BookRepositoryImpl extends BaseRepositoryImpl implements BookReposi
 
     @Override
     public List<BookEntity> getList() {
-        return null;
+        Query<BookEntity> query = currentSession.createQuery("from BookEntity order by id desc", BookEntity.class);
+        return query.getResultList();
     }
 
     @Override

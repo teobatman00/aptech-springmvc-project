@@ -3,6 +3,7 @@ package org.example.repository.impl;
 import org.example.entity.UserEntity;
 import org.example.repository.UserRepository;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,21 +19,23 @@ public class UserRepositoryImpl extends BaseRepositoryImpl implements UserReposi
 
     @Override
     public List<UserEntity> getList() {
-        return null;
+        Query<UserEntity> query = currentSession.createQuery("from UserEntity order by id desc", UserEntity.class);
+        return query.getResultList();
     }
 
     @Override
     public UserEntity getById(Long id) {
-        return null;
+        return currentSession.get(UserEntity.class, id);
     }
 
     @Override
     public void save(UserEntity entity) {
-
+        currentSession.saveOrUpdate(entity);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        UserEntity userEntity = currentSession.get(UserEntity.class, id);
+        currentSession.delete(userEntity);
     }
 }
