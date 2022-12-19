@@ -16,10 +16,7 @@
           <a class="nav-link" href="${pageContext.request.contextPath}/category/list">Category</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <a href="${pageContext.request.contextPath}/auth/login" class="btn btn-primary">Login</a>
     </div>
   </div>
 </nav>
