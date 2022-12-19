@@ -15,7 +15,7 @@ public class CategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     @NotNull
     private String name;
     @Column(name = "description")
@@ -27,7 +27,7 @@ public class CategoryEntity {
     @UpdateTimestamp
     @Column(name = "updated_date", nullable = false)
     private Date updatedDate;
-    @OneToMany
+    @OneToMany(targetEntity = BookEntity.class, cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
     private Set<BookEntity> bookEntities;
 
     public CategoryEntity(String name, String description, Set<BookEntity> bookEntities) {
@@ -45,5 +45,29 @@ public class CategoryEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<BookEntity> getBookEntities() {
+        return bookEntities;
+    }
+
+    public void setBookEntities(Set<BookEntity> bookEntities) {
+        this.bookEntities = bookEntities;
     }
 }

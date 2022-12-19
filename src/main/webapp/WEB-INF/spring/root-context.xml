@@ -7,9 +7,9 @@
   <!-- Root Context: defines shared resources visible to all other web components -->
   <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
     <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
-    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/c2007_c2011_spring_mvc?useSSL=false&amp;serverTimezone=UTC" />
+    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/aptech_springmvc_book?useSSL=false" />
     <property name="user" value="root" />
-    <property name="password" value="ab123456.." />
+    <property name="password" value="" />
     
     <property name="minPoolSize" value="5" />
     <property name="maxPoolSize" value="20" />

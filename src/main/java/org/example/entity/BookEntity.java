@@ -41,7 +41,7 @@ public class BookEntity {
     private Date updatedDate;
     @Transient
     private String base64Image;
-    @ManyToOne
+    @ManyToOne(targetEntity = CategoryEntity.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH})
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 

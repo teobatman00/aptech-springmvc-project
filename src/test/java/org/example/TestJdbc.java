@@ -9,9 +9,9 @@ public class TestJdbc {
 
     @Test
     public void testConnectJdbc() {
-        String jdbcUrl = "jdbc:mysql://localhost:3306/C2007_C2011_ebook?useSSL=false";
+        String jdbcUrl = "jdbc:mysql://localhost:3306/aptech_springmvc_book?useSSL=false";
         String user = "root";
-        String pass = "ab123456..";
+        String pass = "";
 
         try {
             System.out.println("Connecting to database: " + jdbcUrl);
