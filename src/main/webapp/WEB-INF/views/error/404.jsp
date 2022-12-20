@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <html>
 <head>
     <%@include file="../include/head.jsp"%>
@@ -13,5 +14,8 @@
 </head>
 <body>
     <h1 class="text-center">Page not found</h1>
+    <c:if test="${not empty errorMessage}">
+        <p>${errorMessage}</p>
+    </c:if>
 </body>
 </html>

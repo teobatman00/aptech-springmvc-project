@@ -1,7 +1,7 @@
 package org.example.controller;
 
-import org.example.entity.BookEntity;
 import org.example.entity.CategoryEntity;
+import org.example.enums.error.CategoryError;
 import org.example.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +31,10 @@ public class CategoryController {
     @GetMapping("/detail/{id}")
     public String showDetail(@PathVariable("id") long id, Model model) {
         CategoryEntity category = categoryService.getById(id);
+        if (category == null) {
+            model.addAttribute("errorMessage", CategoryError.NOT_FOUND.getMessage());
+            return "error/404";
+        }
         model.addAttribute("category", category);
         return "category/detail";
     }
@@ -51,12 +55,21 @@ public class CategoryController {
     @GetMapping("/load/{id}")
     public String updateForm(@PathVariable("id") long id, Model model) {
         CategoryEntity category = categoryService.getById(id);
+        if (category == null) {
+            model.addAttribute("errorMessage", CategoryError.NOT_FOUND.getMessage());
+            return "error/404";
+        }
         model.addAttribute("category", category);
         return "category/update";
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteCategoryById(@PathVariable("id") long id) {
+    public String deleteCategoryById(@PathVariable("id") long id, Model model) {
+        CategoryEntity category = categoryService.getById(id);
+        if (category == null) {
+            model.addAttribute("errorMessage", CategoryError.NOT_FOUND.getMessage());
+            return "error/404";
+        }
         categoryService.deleteCategoryById(id);
         return "redirect:/category/list";
     }
