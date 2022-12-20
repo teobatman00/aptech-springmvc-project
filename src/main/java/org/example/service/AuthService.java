@@ -1,10 +1,11 @@
 package org.example.service;
 
+import org.example.entity.UserEntity;
 import org.example.enums.UserRole;
-import org.example.request.LoginRequest;
+import org.example.request.auth.LoginRequest;
 
 public interface AuthService {
-    String checkLoginUser(LoginRequest request);
+    UserEntity getUserLogin(LoginRequest request);
 
     UserRole checkUserRole(LoginRequest request);
 }

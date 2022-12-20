@@ -1,7 +1,10 @@
 package org.example.controller;
 
 import org.example.entity.BookEntity;
+import org.example.entity.CategoryEntity;
+import org.example.request.book.BookCreateRequest;
 import org.example.service.BookService;
+import org.example.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +17,12 @@ import java.util.List;
 @RequestMapping("/book")
 public class BookController {
     private final BookService bookService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, CategoryService categoryService) {
         this.bookService = bookService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/list")
@@ -36,8 +41,10 @@ public class BookController {
 
     @GetMapping("/new")
     public String addForm(Model model) {
-        BookEntity book = new BookEntity();
+        List<CategoryEntity> categories = categoryService.getCategory();
+        BookCreateRequest book = new BookCreateRequest();
         model.addAttribute("book", book);
+        model.addAttribute("categories", categories);
         return "book/create";
     }
 

@@ -1,9 +1,10 @@
 package org.example.service.impl;
 
+import org.example.entity.UserEntity;
 import org.example.enums.UserRole;
 import org.example.repository.RoleRepository;
 import org.example.repository.UserRepository;
-import org.example.request.LoginRequest;
+import org.example.request.auth.LoginRequest;
 import org.example.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String checkLoginUser(LoginRequest request) {
-        return null;
+    public UserEntity getUserLogin(LoginRequest request) {
+        return userRepository.getByUserNameAndPassword(request.getUserName(), request.getPassword());
     }
 
     @Override

@@ -8,9 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <%@include file="../include/head.jsp"%>
+    <title>Category List</title>
 </head>
 <body>
-
+<header>
+    <%@include file="../include/navbar.jsp"%>
+    <h1>Category List</h1>
+</header>
+<main>
+    Category List
+</main>
 </body>
 </html>

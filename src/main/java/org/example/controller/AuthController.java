@@ -1,7 +1,7 @@
 package org.example.controller;
 
-import org.example.enums.UserRole;
-import org.example.request.LoginRequest;
+import org.example.entity.UserEntity;
+import org.example.request.auth.LoginRequest;
 import org.example.service.AuthService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +27,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute("userLogin") LoginRequest request, Model model) {
-        String errorMessage = authService.checkLoginUser(request);
-        UserRole userRole = authService.checkUserRole(request);
+        UserEntity userEntity = authService.getUserLogin(request);
+        if (userEntity == null) {
+            model.addAttribute("errorMessage", "Username or password not match");
+            return "auth/login";
+        }
+//        UserRole userRole = authService.checkUserRole(request);
+        model.addAttribute("users", userEntity);
         return "redirect:/book/list";
     }
 }

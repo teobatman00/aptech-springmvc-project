@@ -1,4 +1,4 @@
-package org.example.request;
+package org.example.request.auth;
 
 public class LoginRequest {
     private String userName;

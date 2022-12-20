@@ -38,4 +38,17 @@ public class UserRepositoryImpl extends BaseRepositoryImpl implements UserReposi
         UserEntity userEntity = currentSession.get(UserEntity.class, id);
         currentSession.delete(userEntity);
     }
+
+    @Override
+    public UserEntity getByUserNameAndPassword(String userName, String password) {
+        Query<UserEntity> query = currentSession.createQuery(
+                "from UserEntity where userName = :userName and password = :password",
+                UserEntity.class);
+        query.setParameter("userName", userName)
+                .setParameter("password", password);
+        if (query.getResultList().size() == 0) {
+            return null;
+        }
+        return query.getSingleResult();
+    }
 }
