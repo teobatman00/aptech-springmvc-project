@@ -38,4 +38,11 @@ public class CategoryRepositoryImpl extends BaseRepositoryImpl implements Catego
         CategoryEntity categoryEntity = currentSession.get(CategoryEntity.class, id);
         currentSession.delete(categoryEntity);
     }
+
+    @Override
+    public boolean existedByName(String name) {
+        Query<CategoryEntity> query = currentSession.createQuery("from CategoryEntity where name = :name limit 1", CategoryEntity.class);
+        query.setParameter("name", name);
+        return query.getSingleResult() != null;
+    }
 }

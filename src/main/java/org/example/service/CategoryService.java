@@ -12,4 +12,6 @@ public interface CategoryService {
     void saveCategory(CategoryEntity category);
 
     void deleteCategoryById(long id);
+
+    boolean existedCategoryByName(String name);
 }

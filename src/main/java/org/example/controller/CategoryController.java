@@ -2,6 +2,8 @@ package org.example.controller;
 
 import org.example.entity.CategoryEntity;
 import org.example.enums.error.CategoryError;
+import org.example.mapper.CategoryMapper;
+import org.example.request.category.CategoryCreateRequest;
 import org.example.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +17,12 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
     private final CategoryService categoryService;
+    private final CategoryMapper categoryMapper;
 
     @Autowired
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, CategoryMapper categoryMapper) {
         this.categoryService = categoryService;
+        this.categoryMapper = categoryMapper;
     }
 
     @GetMapping("/list")
@@ -41,13 +45,18 @@ public class CategoryController {
 
     @GetMapping("/new")
     public String addForm(Model model) {
-        CategoryEntity category = new CategoryEntity();
-        model.addAttribute("category", category);
+        CategoryCreateRequest categoryCreateRequest = new CategoryCreateRequest();
+        model.addAttribute("category", categoryCreateRequest);
         return "category/create";
     }
 
     @PostMapping("/save")
-    public String saveCategory(@Validated @ModelAttribute("category") CategoryEntity category) {
+    public String saveCategory(@Validated @ModelAttribute("category") CategoryCreateRequest categoryCreateRequest, Model model) {
+        if (categoryService.existedCategoryByName(categoryCreateRequest.getName())) {
+            model.addAttribute("errorMessage", CategoryError.EXISTED_BY_NAME.getMessage());
+            return "error/400";
+        }
+        CategoryEntity category = categoryMapper.mapCreateRequestToEntity(categoryCreateRequest);
         categoryService.saveCategory(category);
         return "redirect:/category/list";
     }

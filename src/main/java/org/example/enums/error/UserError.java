@@ -1,12 +1,11 @@
 package org.example.enums.error;
 
-public enum CategoryError {
-    NOT_FOUND("Category cannot be found"),
-    EXISTED_BY_NAME("Category name is existed");
+public enum UserError {
+    NOT_FOUND("User cannot be found");
 
     private final String message;
 
-    CategoryError(String message) {
+    UserError(String message) {
         this.message = message;
     }
 

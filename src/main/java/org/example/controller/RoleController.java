@@ -30,6 +30,10 @@ public class RoleController {
     @GetMapping("/detail/{id}")
     public String showDetail(@PathVariable("id") long id, Model model) {
         RoleEntity role = roleService.getById(id);
+        if (role == null) {
+            model.addAttribute("error", RoleError.NOT_FOUND.getMessage());
+            return "error/404";
+        }
         model.addAttribute("role", role);
         return "role/detail";
     }

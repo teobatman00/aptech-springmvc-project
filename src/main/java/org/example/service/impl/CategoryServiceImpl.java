@@ -38,4 +38,9 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategoryById(long id) {
         categoryRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existedCategoryByName(String name) {
+        return categoryRepository.existedByName(name);
+    }
 }
