@@ -1,7 +1,7 @@
 package org.example.controller;
 
-import org.example.entity.CategoryEntity;
 import org.example.entity.RoleEntity;
+import org.example.enums.error.RoleError;
 import org.example.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.enums.error;
 
 public enum RoleError {
     NOT_FOUND("Role cannot be found"),
