@@ -37,7 +37,7 @@
                                     <form:input class="form-control" type="text" name="username" placeholder="Username"  path="userName"/>
                                 </div>
                                 <div class="mb-3">
-                                    <form:input class="form-control" type="password" name="password" placeholder="Password"  path="password"/>
+                                    <form:input class="form-control" type="password" name="password" placeholder="Password" path="password"/>
                                 </div>
                                 <div class="mb-3">
                                     <button class="btn btn-primary d-block w-100" type="submit">Login</button>

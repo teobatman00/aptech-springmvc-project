@@ -15,7 +15,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
 
     <org.springframework-version>5.3.9</org.springframework-version>
-    <org.springsecurity-version>5.2.13.RELEASE</org.springsecurity-version>
+    <org.springsecurity-version>5.5.2</org.springsecurity-version>
     <org.aspectj-version>1.9.7</org.aspectj-version>
     <org.slf4j-version>1.7.32</org.slf4j-version>
   </properties>

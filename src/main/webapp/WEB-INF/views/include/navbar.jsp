@@ -16,7 +16,7 @@
           <a class="nav-link" href="${pageContext.request.contextPath}/category/list">Category</a>
         </li>
       </ul>
-      <a href="${pageContext.request.contextPath}/auth/login" class="btn btn-primary">Login</a>
+      <a href="${pageContext.request.contextPath}/auth/loginPage" class="btn btn-primary">Login</a>
     </div>
   </div>
 </nav>

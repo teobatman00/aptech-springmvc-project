@@ -14,7 +14,7 @@
 </head>
 <body>
     <h1 class="text-center">Page not found</h1>
-    <c:if test="${not empty errorMessage}">
+    <c:if test="${errorMessage}">
         <p>${errorMessage}</p>
     </c:if>
 </body>

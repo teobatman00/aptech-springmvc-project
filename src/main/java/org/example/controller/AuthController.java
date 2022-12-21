@@ -19,7 +19,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @GetMapping("/login")
+    @GetMapping("/loginPage")
     public String login(Model model) {
         model.addAttribute("userLogin", new LoginRequest());
         return "auth/login";
