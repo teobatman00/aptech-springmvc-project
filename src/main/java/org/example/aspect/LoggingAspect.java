@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.util.logging.LogManager;
 
 @Aspect
-@Component
 public class LoggingAspect {
     private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 

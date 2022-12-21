@@ -71,8 +71,10 @@ public class BookController {
             model.addAttribute("errorMessage", BookError.NOT_FOUND.getMessage());
             return "error/404";
         }
+        List<CategoryEntity> categories = categoryService.getCategory();
         BookUpdateRequest bookUpdateRequest = bookMapper.mapEntityToUpdateRequest(book);
         model.addAttribute("bookUpdate", bookUpdateRequest);
+        model.addAttribute("categories", categories);
         return "book/update";
     }
 
