@@ -27,8 +27,26 @@ public class CategoryEntity {
     @UpdateTimestamp
     @Column(name = "updated_date", nullable = false)
     private Date updatedDate;
-    @OneToMany(targetEntity = BookEntity.class, cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(targetEntity = BookEntity.class,
+            cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST},
+            mappedBy = "category")
     private Set<BookEntity> bookEntities;
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
 
     public CategoryEntity(String name, String description, Set<BookEntity> bookEntities) {
         this.name = name;

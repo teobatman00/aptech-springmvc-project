@@ -41,8 +41,9 @@ public class CategoryRepositoryImpl extends BaseRepositoryImpl implements Catego
 
     @Override
     public boolean existedByName(String name) {
-        Query<CategoryEntity> query = currentSession.createQuery("from CategoryEntity where name = :name limit 1", CategoryEntity.class);
+        Query<CategoryEntity> query = currentSession.createQuery("from CategoryEntity where name = :name", CategoryEntity.class);
         query.setParameter("name", name);
-        return query.getSingleResult() != null;
+        query.setMaxResults(1);
+        return query.getResultList().size() > 0;
     }
 }

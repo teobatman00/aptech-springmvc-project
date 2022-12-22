@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -73,13 +74,15 @@ public class CategoryController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteCategoryById(@PathVariable("id") long id, Model model) {
+    public String deleteCategoryById(@PathVariable("id") long id, Model model, HttpServletResponse response) {
         CategoryEntity category = categoryService.getById(id);
         if (category == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             model.addAttribute("errorMessage", CategoryError.NOT_FOUND.getMessage());
             return "error/404";
         }
         categoryService.deleteCategoryById(id);
+        response.setStatus(HttpServletResponse.SC_OK);
         return "redirect:/category/list";
     }
 }
