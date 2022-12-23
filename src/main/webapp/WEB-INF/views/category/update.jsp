@@ -11,15 +11,15 @@
 <html>
 <head>
     <%@include file="../include/head.jsp"%>
-    <title>Update category ${category.id}</title>
+    <title>Update category ${id}</title>
 </head>
 <body>
     <header>
         <%@include file="../include/navbar.jsp"%>
-        <h1 class="text-center">Update category ${category.id}</h1>
+        <h1 class="text-center">Update category ${id}</h1>
     </header>
     <main class="container">
-        <form:form method="post" action="${pageContext.request.contextPath}/category/update" modelAttribute="category">
+        <form:form method="post" action="${pageContext.request.contextPath}/category/update/${id}" modelAttribute="categoryUpdate">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <form:input type="text" cssClass="form-control" id="name" placeholder="Category name" path="name" />
@@ -28,7 +28,7 @@
                 <label for="description" class="form-label">Description</label>
                 <form:textarea cssClass="form-control" id="description" rows="3" path="description" placeholder="Category description" />
             </div>
-            <button type="submit" class="btn btn-primary d-flex m-auto">Create</button>
+            <button type="submit" class="btn btn-primary d-flex m-auto">Update</button>
         </form:form>
     </main>
 </body>

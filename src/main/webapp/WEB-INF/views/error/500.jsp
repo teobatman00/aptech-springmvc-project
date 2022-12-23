@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <%@include file="../include/head.jsp"%>
@@ -13,5 +14,10 @@
 </head>
 <body>
     <h1 class="text-center">Server internal error</h1>
+    <p>Failed URL: ${url}</p>
+    <p>Exception: ${ex.message}</p>
+    <c:forEach items="${ex.stackTrace}" var="ste">
+        <p>${ste}</p>
+    </c:forEach>
 </body>
 </html>

@@ -4,6 +4,7 @@ import org.example.entity.CategoryEntity;
 import org.example.enums.error.CategoryError;
 import org.example.mapper.CategoryMapper;
 import org.example.request.category.CategoryCreateRequest;
+import org.example.request.category.CategoryUpdateRequest;
 import org.example.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,11 +70,27 @@ public class CategoryController {
             model.addAttribute("errorMessage", CategoryError.NOT_FOUND.getMessage());
             return "error/404";
         }
-        model.addAttribute("category", category);
+        CategoryUpdateRequest categoryUpdate = categoryMapper.mapEntityToUpdateRequest(category);
+        model.addAttribute("categoryUpdate", categoryUpdate);
+        model.addAttribute("id", category.getId());
         return "category/update";
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/update/{id}")
+    public String update(@Validated @ModelAttribute("categoryUpdate") CategoryUpdateRequest categoryUpdateRequest,
+                         Model model,
+                         @PathVariable("id") long id) {
+        CategoryEntity category = categoryService.getById(id);
+        if (category == null) {
+            model.addAttribute("errorMessage", CategoryError.NOT_FOUND.getMessage());
+            return "error/404";
+        }
+        category = categoryMapper.mapUpdateRequestToEntity(category ,categoryUpdateRequest);
+        categoryService.saveCategory(category);
+        return "redirect:/category/list";
+    }
+
+    @GetMapping("/delete/{id}")
     public String deleteCategoryById(@PathVariable("id") long id, Model model, HttpServletResponse response) {
         CategoryEntity category = categoryService.getById(id);
         if (category == null) {

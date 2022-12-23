@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.entity.BookEntity;
 import org.example.entity.CategoryEntity;
 import org.example.enums.error.BookError;
+import org.example.enums.error.CategoryError;
 import org.example.mapper.BookMapper;
 import org.example.request.book.BookCreateRequest;
 import org.example.request.book.BookUpdateRequest;
@@ -58,8 +59,14 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    public String saveBook(@Validated @ModelAttribute("book") BookCreateRequest bookCreateRequest) {
+    public String saveBook(@Validated @ModelAttribute("book") BookCreateRequest bookCreateRequest, Model model) {
+        CategoryEntity categoryEntity = categoryService.getById(bookCreateRequest.getCategoryId());
+        if (categoryEntity == null) {
+            model.addAttribute("errorMessage", CategoryError.NOT_FOUND.getMessage());
+            return "error/404";
+        }
         BookEntity bookEntity = bookMapper.mapCreateRequestToEntity(bookCreateRequest);
+        bookEntity.setCategory(categoryEntity);
         bookService.saveBook(bookEntity);
         return "redirect:/book/list";
     }

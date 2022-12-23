@@ -1,5 +1,7 @@
 package org.example.request.book;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -11,12 +13,12 @@ public class BookCreateRequest {
     @NotNull
     private String author;
     @NotNull
-    private byte[] avatar;
+    private MultipartFile avatar;
     @NotNull
     private boolean isPublished;
     @NotNull
     private Date publishedDate;
-    @NotNull
+
     private Long categoryId;
 
     public String getName() {
@@ -43,11 +45,11 @@ public class BookCreateRequest {
         this.author = author;
     }
 
-    public byte[] getAvatar() {
+    public MultipartFile getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
+    public void setAvatar(@NotNull MultipartFile avatar) {
         this.avatar = avatar;
     }
 

@@ -6,16 +6,23 @@ import org.example.request.book.BookCreateRequest;
 import org.example.request.book.BookUpdateRequest;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 @Component
 public class BookMapperImpl implements BookMapper {
 
     @Override
     public BookEntity mapCreateRequestToEntity(BookCreateRequest bookCreateRequest) {
         BookEntity bookEntity = new BookEntity();
-        bookEntity.setName(bookEntity.getName());
-        bookEntity.setDescription(bookEntity.getDescription());
-        bookEntity.setAuthor(bookEntity.getAuthor());
-        bookEntity.setAvatar(bookEntity.getAvatar());
+        bookEntity.setName(bookCreateRequest.getName());
+        bookEntity.setDescription(bookCreateRequest.getDescription());
+        bookEntity.setAuthor(bookCreateRequest.getAuthor());
+        try {
+            bookEntity.setAvatar(bookCreateRequest.getAvatar().getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        bookEntity.setPublished(bookCreateRequest.isPublished());
         bookEntity.setPublishedDate(bookCreateRequest.getPublishedDate());
         return bookEntity;
     }

@@ -32,22 +32,8 @@
         </div>
         <div class="mt-2">
             <a href="${pageContext.request.contextPath}/category/load/${category.id}" class="btn btn-warning">Update</a>
-            <button type="button" class="btn btn-danger" onclick="deleteCategory(${category.id})">Delete</button>
+            <a href="${pageContext.request.contextPath}/category/delete/${category.id}" class="btn btn-danger">Delete</a>
         </div>
     </main>
 </body>
-<script type="text/javascript">
-    function deleteCategory(categoryId) {
-        let confirmed = confirm("Would you like to delete category " + categoryId)
-        if (confirmed) {
-            $.ajax({
-                url: "${pageContext.request.contextPath}/category/delete/" + categoryId,
-                method: 'POST',
-                success: function () {
-                    alert("Delete category " + categoryId + " success")
-                }
-            })
-        }
-    }
-</script>
 </html>

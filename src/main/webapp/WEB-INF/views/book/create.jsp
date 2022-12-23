@@ -20,7 +20,7 @@
     </header>
     <main class="container">
         <div class="card-body p-sm-5">
-            <form:form method="post" action="${pageContext.request.contextPath}/book/save" modelAttribute="book">
+            <form:form method="post" action="${pageContext.request.contextPath}/book/save" modelAttribute="book" enctype="multipart/form-data">
                 <div class="mb-3">
                     <form:input id="name-2" cssClass="form-control" type="text" name="name" placeholder="Name"  path="name"/>
                 </div>
