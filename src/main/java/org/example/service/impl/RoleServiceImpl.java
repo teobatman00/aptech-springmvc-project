@@ -5,12 +5,11 @@ import org.example.repository.RoleRepository;
 import org.example.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
@@ -20,11 +19,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public List<RoleEntity> getRoles() {
         return roleRepository.getList();
     }
 
     @Override
+    @Transactional
     public RoleEntity getById(long id) {
         return roleRepository.getById(id);
     }
