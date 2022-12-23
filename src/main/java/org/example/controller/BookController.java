@@ -7,6 +7,8 @@ import org.example.enums.error.CategoryError;
 import org.example.mapper.BookMapper;
 import org.example.request.book.BookCreateRequest;
 import org.example.request.book.BookUpdateRequest;
+import org.example.response.BookGetDetailResponse;
+import org.example.response.BookGetListResponse;
 import org.example.service.BookService;
 import org.example.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/book")
@@ -34,7 +37,8 @@ public class BookController {
     @GetMapping("/list")
     public String listBook(Model model) {
         List<BookEntity> books = bookService.getBooks();
-        model.addAttribute("books", books);
+        List<BookGetListResponse> bookResponse = books.stream().map(bookMapper::mapEntityToGetListResponse).collect(Collectors.toList());
+        model.addAttribute("books", bookResponse);
         return "book/index";
     }
 
@@ -45,7 +49,8 @@ public class BookController {
             model.addAttribute("errorMessage", BookError.NOT_FOUND.getMessage());
             return "error/404";
         }
-        model.addAttribute("book", book);
+        BookGetDetailResponse detailResponse = bookMapper.mapEntityToDetailResponse(book);
+        model.addAttribute("book", detailResponse);
         return "book/detail";
     }
 
@@ -97,13 +102,8 @@ public class BookController {
         return "redirect:/book/list";
     }
 
-    @PostMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable("id") long id, Model model) {
-        BookEntity book = bookService.getById(id);
-        if (book == null) {
-            model.addAttribute("errorMessage", BookError.NOT_FOUND.getMessage());
-            return "error/404";
-        }
         bookService.deleteBookById(id);
         return "redirect:/book/list";
     }

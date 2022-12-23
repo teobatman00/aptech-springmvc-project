@@ -2,6 +2,7 @@ package org.example.repository.impl;
 
 import org.example.entity.UserEntity;
 import org.example.repository.UserRepository;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl implements UserRepository {
+
+    private final Session currentSession;
 
     @Autowired
     public UserRepositoryImpl(SessionFactory sessionFactory) {
-        super(sessionFactory);
+        currentSession = sessionFactory.getCurrentSession();
     }
 
     @Override

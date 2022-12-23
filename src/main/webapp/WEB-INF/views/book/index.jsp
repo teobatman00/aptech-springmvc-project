@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <%@include file="../include/head.jsp"%>
@@ -19,46 +20,23 @@
     <main class="container">
         <a href="${pageContext.request.contextPath}/book/new" class="btn btn-success my-3">Add</a>
         <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-            <div class="col">
-                <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />
-                    <div class="card-body p-4">
-                        <h4 class="card-title">Lorem libero donec</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="d-flex justify-content-evenly">
-                            <button class="btn btn-primary" type="button">Detail</button>
-                            <button class="btn btn-primary" type="button">Update</button>
-                            <button class="btn btn-primary" type="button">Delete</button>
+            <c:forEach items="${books}" var="book">
+                <div class="col">
+                    <div class="card">
+                        <img class="card-img-top w-100 d-block fit-cover" style="height: 200px;"
+                             src="data:image/**;base64, ${book.avatar}"  alt="Image"/>
+                        <div class="card-body p-4">
+                            <h4 class="card-title">${book.name}</h4>
+                            <p class="card-text">${book.description}</p>
+                            <div class="d-flex justify-content-evenly">
+                                <a href="${pageContext.request.contextPath}/book/detail/${book.id}" class="btn btn-primary">Detail</a>
+                                <a href="${pageContext.request.contextPath}/book/load/${book.id}" class="btn btn-warning" >Update</a>
+                                <a href="${pageContext.request.contextPath}/book/delete/${book.id}" class="btn btn-danger">Delete</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />
-                    <div class="card-body p-4">
-                        <h4 class="card-title">Lorem libero donec</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="d-flex justify-content-evenly">
-                            <button class="btn btn-primary" type="button">Detail</button>
-                            <button class="btn btn-primary" type="button">Update</button>
-                            <button class="btn btn-primary" type="button">Delete</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col">
-                <div class="card"><img class="card-img-top w-100 d-block fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />
-                    <div class="card-body p-4">
-                        <h4 class="card-title">Lorem libero donec</h4>
-                        <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                        <div class="d-flex justify-content-evenly">
-                            <button class="btn btn-primary" type="button">Detail</button>
-                            <button class="btn btn-primary" type="button">Update</button>
-                            <button class="btn btn-primary" type="button">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </main>
 </body>

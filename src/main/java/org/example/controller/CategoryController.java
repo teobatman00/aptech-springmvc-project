@@ -91,15 +91,13 @@ public class CategoryController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteCategoryById(@PathVariable("id") long id, Model model, HttpServletResponse response) {
+    public String deleteCategoryById(@PathVariable("id") long id, Model model) {
         CategoryEntity category = categoryService.getById(id);
         if (category == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             model.addAttribute("errorMessage", CategoryError.NOT_FOUND.getMessage());
             return "error/404";
         }
         categoryService.deleteCategoryById(id);
-        response.setStatus(HttpServletResponse.SC_OK);
         return "redirect:/category/list";
     }
 }

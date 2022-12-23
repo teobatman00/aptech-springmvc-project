@@ -2,6 +2,7 @@ package org.example.repository.impl;
 
 import org.example.entity.RoleEntity;
 import org.example.repository.RoleRepository;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class RoleRepositoryImpl extends BaseRepositoryImpl implements RoleRepository {
+public class RoleRepositoryImpl implements RoleRepository {
+
+    private final Session currentSession;
 
     @Autowired
     public RoleRepositoryImpl(SessionFactory sessionFactory) {
-        super(sessionFactory);
+        currentSession = sessionFactory.getCurrentSession();
     }
 
     @Override
