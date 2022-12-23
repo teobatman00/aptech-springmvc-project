@@ -40,10 +40,10 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     @Bean
     public DataSource dataSource() throws PropertyVetoException {
         ComboPooledDataSource pooledDataSource = new ComboPooledDataSource();
-//        pooledDataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
+        pooledDataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
+        pooledDataSource.setJdbcUrl("jdbc:mysql://localhost:3306/aptech_springmvc_book?useSSL=false");
         pooledDataSource.setUser("root");
         pooledDataSource.setPassword("");
-        pooledDataSource.setJdbcUrl("jdbc:mysql://localhost:3306/aptech_springmvc_book?useSSL=false");
         pooledDataSource.setMinPoolSize(5);
         pooledDataSource.setMaxPoolSize(20);
         pooledDataSource.setMaxIdleTime(30000);

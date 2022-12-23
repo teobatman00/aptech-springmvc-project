@@ -8,10 +8,10 @@ import org.example.request.auth.LoginRequest;
 import org.example.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.transaction.Transactional;
 
 @Service
-@Transactional
 public class AuthServiceImpl implements AuthService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
@@ -23,11 +23,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
     public UserEntity getUserLogin(LoginRequest request) {
         return userRepository.getByUserNameAndPassword(request.getUserName(), request.getPassword());
     }
 
     @Override
+    @Transactional
     public UserRole checkUserRole(LoginRequest request) {
         return null;
     }
