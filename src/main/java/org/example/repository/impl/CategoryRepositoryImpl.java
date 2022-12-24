@@ -13,37 +13,43 @@ import java.util.List;
 @Repository
 public class CategoryRepositoryImpl implements CategoryRepository {
 
-    private final Session currentSession;
+
+    private SessionFactory sessionFactory;
 
     @Autowired
     public CategoryRepositoryImpl(SessionFactory sessionFactory) {
-        currentSession = sessionFactory.getCurrentSession();
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
     public List<CategoryEntity> getList() {
+        Session currentSession = sessionFactory.getCurrentSession();
         Query<CategoryEntity> query = currentSession.createQuery("from CategoryEntity order by id desc", CategoryEntity.class);
         return query.getResultList();
     }
 
     @Override
     public CategoryEntity getById(Long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
         return currentSession.get(CategoryEntity.class, id);
     }
 
     @Override
     public void save(CategoryEntity entity) {
+        Session currentSession = sessionFactory.getCurrentSession();
         currentSession.saveOrUpdate(entity);
     }
 
     @Override
     public void deleteById(Long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
         CategoryEntity categoryEntity = currentSession.get(CategoryEntity.class, id);
         currentSession.delete(categoryEntity);
     }
 
     @Override
     public boolean existedByName(String name) {
+        Session currentSession = sessionFactory.getCurrentSession();
         Query<CategoryEntity> query = currentSession.createQuery("from CategoryEntity where name = :name", CategoryEntity.class);
         query.setParameter("name", name);
         query.setMaxResults(1);

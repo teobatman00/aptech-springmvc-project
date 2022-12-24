@@ -13,37 +13,44 @@ import java.util.List;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-    private final Session currentSession;
+
+    private SessionFactory sessionFactory;
 
     @Autowired
     public UserRepositoryImpl(SessionFactory sessionFactory) {
-        currentSession = sessionFactory.getCurrentSession();
+
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
     public List<UserEntity> getList() {
+        Session currentSession = sessionFactory.getCurrentSession();
         Query<UserEntity> query = currentSession.createQuery("from UserEntity order by id desc", UserEntity.class);
         return query.getResultList();
     }
 
     @Override
     public UserEntity getById(Long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
         return currentSession.get(UserEntity.class, id);
     }
 
     @Override
     public void save(UserEntity entity) {
+        Session currentSession = sessionFactory.getCurrentSession();
         currentSession.saveOrUpdate(entity);
     }
 
     @Override
     public void deleteById(Long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
         UserEntity userEntity = currentSession.get(UserEntity.class, id);
         currentSession.delete(userEntity);
     }
 
     @Override
     public UserEntity getByUserNameAndPassword(String userName, String password) {
+        Session currentSession = sessionFactory.getCurrentSession();
         Query<UserEntity> query = currentSession.createQuery(
                 "from UserEntity where userName = :userName and password = :password",
                 UserEntity.class);

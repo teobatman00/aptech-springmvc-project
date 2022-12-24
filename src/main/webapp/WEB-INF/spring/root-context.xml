@@ -8,12 +8,18 @@
   <context:component-scan base-package="org.example" />
     <mvc:annotation-driven />
 
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/WEB-INF/views/" />
+      <property name="suffix" value=".jsp" />
+  </bean>
+
   <!-- Root Context: defines shared resources visible to all other web components -->
-  <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
     <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/aptech_springmvc_book?useSSL=false" />
     <property name="user" value="root" />
     <property name="password" value="" />
+    <property name="testConnectionOnCheckin" value="true" />
     
     <property name="minPoolSize" value="5" />
     <property name="maxPoolSize" value="20" />
@@ -21,17 +27,19 @@
    </bean>
   
   <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-    <property name="dataSource" ref="myDataSource" />
+    <property name="dataSource" ref="dataSource" />
     <property name="packagesToScan" value="org.example.entity" />
     <property name="hibernateProperties">
       <props>
         <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
         <prop key="hibernate.show_sql">true</prop>
+        <prop key="hibernate.allow_update_outside_transaction">true</prop>
       </props>
     </property>
   </bean>
   
-  <bean id="myTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+  <bean id="hibernateTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    <property name="dataSource" ref="dataSource" />
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
 
@@ -39,6 +47,6 @@
     <property name="maxUploadSize" value="10000000" />
   </bean>
 
-  <tx:annotation-driven transaction-manager="myTransactionManager" />
+  <tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
   <aop:aspectj-autoproxy />
 </beans>

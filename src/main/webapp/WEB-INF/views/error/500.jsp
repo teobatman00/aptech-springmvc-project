@@ -1,3 +1,4 @@
+<jsp:useBean id="ex" scope="request" type="java.lang.Exception"/>
 <%--
   Created by IntelliJ IDEA.
   User: Admin

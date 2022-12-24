@@ -63,6 +63,7 @@ public class SpringMvcConfig implements WebMvcConfigurer {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.allow_update_outside_transaction", "true");
         return properties;
     }
 

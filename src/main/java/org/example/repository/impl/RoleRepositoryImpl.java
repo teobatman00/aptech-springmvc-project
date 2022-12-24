@@ -13,21 +13,25 @@ import java.util.List;
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
 
-    private final Session currentSession;
+
+    private SessionFactory sessionFactory;
 
     @Autowired
     public RoleRepositoryImpl(SessionFactory sessionFactory) {
-        currentSession = sessionFactory.getCurrentSession();
+
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
     public List<RoleEntity> getList() {
+        Session currentSession = sessionFactory.getCurrentSession();
         Query<RoleEntity> query = currentSession.createQuery("from RoleEntity order by id desc", RoleEntity.class);
         return query.getResultList();
     }
 
     @Override
     public RoleEntity getById(Long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
         return currentSession.get(RoleEntity.class, id);
     }
 
