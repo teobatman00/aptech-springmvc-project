@@ -13,13 +13,11 @@ import java.util.Set;
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
     @Column(name = "name", nullable = false, unique = true)
-    @NotNull
     private String name;
     @Column(name = "description")
-    @NotNull
     private String description;
     @CreationTimestamp
     @Column(name = "created_date", nullable = false)
@@ -27,8 +25,7 @@ public class CategoryEntity {
     @UpdateTimestamp
     @Column(name = "updated_date", nullable = false)
     private Date updatedDate;
-    @OneToMany(targetEntity = BookEntity.class,
-            cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST},
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST},
             mappedBy = "category")
     private Set<BookEntity> bookEntities;
 

@@ -13,25 +13,19 @@ import java.util.Date;
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
     @Column(name = "name", nullable = false)
-    @NotNull
     private String name;
     @Column(name = "description", nullable = false)
-    @NotNull
     private String description;
     @Column(name = "author", nullable = false)
-    @NotNull
     private String author;
     @Column(name = "avatar", nullable = false)
-    @NotNull
     private byte[] avatar;
     @Column(name = "is_published", nullable = false)
-    @NotNull
     private boolean isPublished;
     @Column(name = "published_date", nullable = false)
-    @NotNull
     private Date publishedDate;
     @CreationTimestamp
     @Column(name = "created_date", nullable = false)
@@ -41,9 +35,25 @@ public class BookEntity {
     private Date updatedDate;
     @Transient
     private String base64Image;
-    @ManyToOne(targetEntity = CategoryEntity.class, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
 
     public CategoryEntity getCategory() {
         return category;

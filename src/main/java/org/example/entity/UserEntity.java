@@ -11,14 +11,12 @@ import java.util.Date;
 @Table(name = "users")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     @Column(name = "username", nullable = false)
-    @NotNull
     private String userName;
     @Column(name = "password", nullable = false)
-    @NotNull
     private String password;
     @Column(name = "avatar")
     private byte[] avatar;
