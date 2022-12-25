@@ -22,7 +22,7 @@
         <div class="card-body p-sm-5">
             <form:form method="post" action="${pageContext.request.contextPath}/book/update" modelAttribute="bookUpdate">
                 <div class="mb-3">
-                    <form:input id="name-2" cssClass="form-control" type="text" name="name" placeholder="Name"  path="name"/>
+                    <form:input id="name-2" cssClass="form-control" type="text" name="name" placeholder="Name"  path="name" />
                 </div>
                 <div class="mb-3">
                     <form:textarea cssClass="form-control" name="description" placeholder="Description" path="description" />
@@ -43,7 +43,7 @@
                 </div>
                 <div class="mb-3">
                     <form:label path="publishedDate" cssClass="form-label">Published Date</form:label>
-                    <form:input path="publishedDate" cssClass="form-control" />
+                    <form:input path="publishedDate" cssClass="form-control" id="publishedDate"/>
                 </div>
                 <div class="mb-3">
                     <form:label path="categoryId" cssClass="form-label">Category</form:label>
@@ -57,4 +57,9 @@
         </div>
     </main>
 </body>
+<script type="text/javascript">
+    $(function () {
+        $("#publishedDate").datepicker();
+    });
+</script>
 </html>

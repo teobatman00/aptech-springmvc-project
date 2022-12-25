@@ -38,6 +38,8 @@ public class BookMapperImpl implements BookMapper {
         bookUpdateRequest.setAuthor(book.getAuthor());
         bookUpdateRequest.setPublished(book.isPublished());
         bookUpdateRequest.setAvatar(book.getAvatar());
+        bookUpdateRequest.setPublishedDate(book.getPublishedDate());
+        bookUpdateRequest.setCategoryId(book.getCategory().getId());
         return bookUpdateRequest;
     }
 
@@ -72,6 +74,7 @@ public class BookMapperImpl implements BookMapper {
         detailResponse.setAvatar(Base64.getEncoder().encodeToString(book.getAvatar()));
         detailResponse.setPublished(book.isPublished());
         detailResponse.setPublishedDate(book.getPublishedDate());
+        detailResponse.setCategory(book.getCategory());
         return detailResponse;
     }
 }

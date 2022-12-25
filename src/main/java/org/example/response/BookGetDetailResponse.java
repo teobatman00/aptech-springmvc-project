@@ -1,5 +1,7 @@
 package org.example.response;
 
+import org.example.entity.CategoryEntity;
+
 import java.util.Date;
 
 public class BookGetDetailResponse {
@@ -10,6 +12,7 @@ public class BookGetDetailResponse {
     private String avatar;
     private boolean isPublished;
     private Date publishedDate;
+    private CategoryEntity category;
 
     public Long getId() {
         return id;
@@ -65,5 +68,13 @@ public class BookGetDetailResponse {
 
     public void setPublishedDate(Date publishedDate) {
         this.publishedDate = publishedDate;
+    }
+
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
     }
 }

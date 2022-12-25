@@ -43,7 +43,7 @@
                 </div>
                 <div class="mb-3">
                     <form:label path="publishedDate" cssClass="form-label">Published Date</form:label>
-                    <form:input path="publishedDate" cssClass="form-control" />
+                    <form:input path="publishedDate" cssClass="form-control" id="publishedDate" />
                 </div>
                 <div class="mb-3">
                     <form:label path="categoryId" cssClass="form-label">Category</form:label>
@@ -57,4 +57,9 @@
         </div>
     </main>
 </body>
+<script type="text/javascript">
+    $(function (){
+        $("#publishedDate").datepicker()
+    })
+</script>
 </html>
