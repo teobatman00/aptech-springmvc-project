@@ -30,6 +30,9 @@
                 <div class="mb-3">
                     <form:input cssClass="form-control" type="text" placeholder="Author"  path="author"/>
                 </div>
+                <div class="mb3">
+                    <img src="data:image/**;base64, ${bookUpdate.oldAvatar}" alt="Image" width="200px">
+                </div>
                 <div class="mb-3">
                     <form:label cssClass="form-label" path="avatar">Avatar</form:label><br>
                     <form:input type="file" cssClass="form-control"  path="avatar"/>

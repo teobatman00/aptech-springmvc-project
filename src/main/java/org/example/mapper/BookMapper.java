@@ -6,12 +6,14 @@ import org.example.request.book.BookUpdateRequest;
 import org.example.response.BookGetDetailResponse;
 import org.example.response.BookGetListResponse;
 
+import java.io.IOException;
+
 public interface BookMapper {
     BookEntity mapCreateRequestToEntity(BookCreateRequest bookCreateRequest);
 
     BookUpdateRequest mapEntityToUpdateRequest(BookEntity book);
 
-    BookEntity mapUpdateRequestToEntity(BookUpdateRequest bookUpdateRequest, BookEntity book);
+    BookEntity mapUpdateRequestToEntity(BookUpdateRequest bookUpdateRequest, BookEntity book) throws IOException;
 
     BookGetListResponse mapEntityToGetListResponse(BookEntity bookEntity);
 

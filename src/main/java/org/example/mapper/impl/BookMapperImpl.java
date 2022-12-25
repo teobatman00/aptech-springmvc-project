@@ -37,19 +37,20 @@ public class BookMapperImpl implements BookMapper {
         bookUpdateRequest.setDescription(book.getDescription());
         bookUpdateRequest.setAuthor(book.getAuthor());
         bookUpdateRequest.setPublished(book.isPublished());
-        bookUpdateRequest.setAvatar(book.getAvatar());
+        bookUpdateRequest.setOldAvatar(Base64.getEncoder().encodeToString(book.getAvatar()));
         bookUpdateRequest.setPublishedDate(book.getPublishedDate());
-        bookUpdateRequest.setCategoryId(book.getCategory().getId());
         return bookUpdateRequest;
     }
 
     @Override
-    public BookEntity mapUpdateRequestToEntity(BookUpdateRequest bookUpdateRequest, BookEntity book) {
+    public BookEntity mapUpdateRequestToEntity(BookUpdateRequest bookUpdateRequest, BookEntity book) throws IOException {
         book.setName(bookUpdateRequest.getName());
         book.setDescription(bookUpdateRequest.getDescription());
         book.setAuthor(bookUpdateRequest.getAuthor());
-        book.setPublished(book.isPublished());
-        book.setAvatar(book.getAvatar());
+        book.setPublished(bookUpdateRequest.isPublished());
+        book.setAvatar(bookUpdateRequest.getAvatar() != null ?
+                bookUpdateRequest.getAvatar().getBytes() : Base64.getDecoder().decode(bookUpdateRequest.getOldAvatar())
+        );
         return book;
     }
 
