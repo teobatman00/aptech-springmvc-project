@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -87,11 +88,12 @@ public class BookController {
         BookUpdateRequest bookUpdateRequest = bookMapper.mapEntityToUpdateRequest(book);
         model.addAttribute("bookUpdate", bookUpdateRequest);
         model.addAttribute("categories", categories);
+        model.addAttribute("id", book.getId());
         return "book/update";
     }
 
-    @PostMapping("/load/{id}")
-    public String updateBook(@Validated @ModelAttribute("bookUpdate") BookUpdateRequest bookUpdateRequest, @PathVariable("id") long id, Model model) {
+    @PostMapping("/update/{id}")
+    public String updateBook(@Validated @ModelAttribute("bookUpdate") BookUpdateRequest bookUpdateRequest, @PathVariable("id") long id, Model model) throws IOException {
         BookEntity book = bookService.getById(id);
         if (book == null) {
             model.addAttribute("errorMessage", BookError.NOT_FOUND.getMessage());

@@ -1,5 +1,6 @@
 package org.example.request.book;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
@@ -17,6 +18,7 @@ public class BookUpdateRequest {
     @NotNull
     private boolean isPublished;
     @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date publishedDate;
 
     private Long categoryId;

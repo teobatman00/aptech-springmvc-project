@@ -16,7 +16,7 @@
 <body>
     <h1 class="text-center">Server internal error</h1>
     <p>Failed URL: ${url}</p>
-    <p>Exception: ${cause} ${ex.message}</p>
+    <p>Exception: ${ex.message}</p>
     <c:forEach items="${ex.stackTrace}" var="ste">
         <p>${ste}</p>
     </c:forEach>

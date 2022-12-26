@@ -16,16 +16,16 @@
 <body>
     <header>
         <%@include file="../include/navbar.jsp"%>
-        <h1 class="text-center">Update book</h1>
+        <h1 class="text-center">Update book ${id}</h1>
     </header>
     <main class="container">
         <div class="card-body p-sm-5">
-            <form:form method="post" action="${pageContext.request.contextPath}/book/update" modelAttribute="bookUpdate">
+            <form:form method="post" action="${pageContext.request.contextPath}/book/update/${id}" modelAttribute="bookUpdate" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <form:input id="name-2" cssClass="form-control" type="text" name="name" placeholder="Name"  path="name" />
+                    <form:input cssClass="form-control" type="text" placeholder="Name"  path="name" />
                 </div>
                 <div class="mb-3">
-                    <form:textarea cssClass="form-control" name="description" placeholder="Description" path="description" />
+                    <form:textarea cssClass="form-control" placeholder="Description" path="description" />
                 </div>
                 <div class="mb-3">
                     <form:input cssClass="form-control" type="text" placeholder="Author"  path="author"/>
@@ -34,7 +34,7 @@
                     <img src="data:image/**;base64, ${bookUpdate.oldAvatar}" alt="Image" width="200px">
                 </div>
                 <div class="mb-3">
-                    <form:label cssClass="form-label" path="avatar">Avatar</form:label><br>
+                    <form:label cssClass="form-label" path="avatar">Avatar</form:label>
                     <form:input type="file" cssClass="form-control"  path="avatar"/>
                 </div>
                 <div class="mb-3">
@@ -51,7 +51,7 @@
                 <div class="mb-3">
                     <form:label path="categoryId" cssClass="form-label">Category</form:label>
                     <form:select path="categoryId" title="Category Select" cssClass="form-control">
-                        <form:option value="NONE">--Select--</form:option>
+                        <form:option value="">--Select--</form:option>
                         <form:options items="${categories}" itemValue="id" itemLabel="name" />
                     </form:select>
                 </div>
