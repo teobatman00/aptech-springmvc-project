@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -24,6 +25,8 @@ public class RoleEntity {
     @UpdateTimestamp
     @Column(name = "updated_date", nullable = false)
     private Date updatedDate;
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "role")
+    private Set<UserEntity> users;
 
     public Long getId() {
         return id;
@@ -47,5 +50,13 @@ public class RoleEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<UserEntity> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UserEntity> users) {
+        this.users = users;
     }
 }

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -56,6 +57,17 @@ public class UserRepositoryImpl implements UserRepository {
                 UserEntity.class);
         query.setParameter("userName", userName)
                 .setParameter("password", password);
+        if (query.getResultList().size() == 0) {
+            return null;
+        }
+        return query.getSingleResult();
+    }
+
+    @Override
+    public UserEntity getByUserName(String userName) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<UserEntity> query = currentSession.createQuery("from UserEntity where userName = :userName", UserEntity.class);
+        query.setParameter("userName", userName);
         if (query.getResultList().size() == 0) {
             return null;
         }

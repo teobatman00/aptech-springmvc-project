@@ -26,8 +26,20 @@ public class UserEntity {
     @UpdateTimestamp
     @Column(name = "updated_date", nullable = false)
     private Date updatedDate;
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "role_id")
+    private RoleEntity role;
     @Transient
     private String base64Image;
+
+    public RoleEntity getRole() {
+        return role;
+    }
+
+    public void setRole(RoleEntity role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
