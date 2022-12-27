@@ -17,8 +17,27 @@
         <%@include file="../include/navbar.jsp"%>
         <h1 class="text-center">List Role</h1>
     </header>
-    <main>
-
+    <main class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${roles}" var="role">
+                <tr>
+                    <th scope="row">
+                        <a href="${pageContext.request.contextPath}/category/detail/${role.id}">${role.id}</a>
+                    </th>
+                    <td>${role.name}</td>
+                    <td>${role.description}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </main>
 </body>
 </html>

@@ -30,13 +30,13 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${categories}" var="category">
+        <c:forEach items="${categories}" var="role">
             <tr>
                 <th scope="row">
-                    <a href="${pageContext.request.contextPath}/category/detail/${category.id}">${category.id}</a>
+                    <a href="${pageContext.request.contextPath}/category/detail/${role.id}">${role.id}</a>
                 </th>
-                <td>${category.name}</td>
-                <td>${category.description}</td>
+                <td>${role.name}</td>
+                <td>${role.description}</td>
             </tr>
         </c:forEach>
         </tbody>
