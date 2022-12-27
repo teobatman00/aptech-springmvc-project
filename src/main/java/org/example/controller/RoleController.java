@@ -21,7 +21,7 @@ public class RoleController {
     }
 
     @GetMapping("/list")
-    public String listCategory(Model model) {
+    public String listRole(Model model) {
         List<RoleEntity> roles = roleService.getRoles();
         model.addAttribute("roles", roles);
         return "role/index";

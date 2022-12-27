@@ -1,11 +1,12 @@
 package org.example.request.category;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class CategoryCreateRequest {
-    @NotNull
+    @NotBlank
     private String name;
-    @NotNull
+    @NotBlank
     private String description;
 
     public String getName() {

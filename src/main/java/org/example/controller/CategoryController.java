@@ -9,6 +9,7 @@ import org.example.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,7 +54,13 @@ public class CategoryController {
     }
 
     @PostMapping("/save")
-    public String saveCategory(@Validated @ModelAttribute("category") CategoryCreateRequest categoryCreateRequest, Model model) {
+    public String saveCategory(@Validated @ModelAttribute("category") CategoryCreateRequest categoryCreateRequest,
+                               Model model,
+                               BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "category/create";
+        }
+
         if (categoryService.existedCategoryByName(categoryCreateRequest.getName())) {
             model.addAttribute("errorMessage", CategoryError.EXISTED_BY_NAME.getMessage());
             return "error/400";
