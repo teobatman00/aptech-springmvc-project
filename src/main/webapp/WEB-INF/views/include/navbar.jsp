@@ -1,3 +1,4 @@
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/">Book Library</a>
@@ -17,6 +18,9 @@
         </li>
       </ul>
       <a href="${pageContext.request.contextPath}/auth/loginPage" class="btn btn-primary">Login</a>
+      <sec:authorize access="isAuthenticated()">
+        <a href="${pageContext.request.contextPath}/auth/logout" class="btn btn-danger">Logout</a>
+      </sec:authorize>
     </div>
   </div>
 </nav>
