@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 import java.util.Date;
 
 @Entity
@@ -32,6 +33,7 @@ public class UserEntity {
     private RoleEntity role;
     @Transient
     private String base64Image;
+
 
     public RoleEntity getRole() {
         return role;

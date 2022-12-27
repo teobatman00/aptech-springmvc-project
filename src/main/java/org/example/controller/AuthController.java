@@ -21,19 +21,7 @@ public class AuthController {
 
     @GetMapping("/loginPage")
     public String login(Model model) {
-        model.addAttribute("userLogin", new LoginRequest());
         return "auth/login";
     }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute("userLogin") LoginRequest request, Model model) {
-        UserEntity userEntity = authService.getUserLogin(request);
-        if (userEntity == null) {
-            model.addAttribute("errorMessage", "Username or password not match");
-            return "auth/login";
-        }
-//        UserRole userRole = authService.checkUserRole(request);
-        model.addAttribute("users", userEntity);
-        return "redirect:/book/list";
-    }
 }

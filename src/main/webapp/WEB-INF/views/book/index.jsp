@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <%@include file="../include/head.jsp"%>
@@ -15,6 +16,9 @@
 <body>
     <header>
         <%@include file="../include/navbar.jsp"%>
+        <p class="text-center">Welcome <sec:authorize access="isAuthenticated()">
+            <sec:authentication property="principal.username" />
+        </sec:authorize></p>
         <h1 class="text-center">This is book list</h1>
     </header>
     <main class="container">
