@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,7 +66,7 @@ public class BookController {
     }
 
     @PostMapping("/save")
-    public String saveBook(@Validated @ModelAttribute("book") BookCreateRequest bookCreateRequest, Model model) {
+    public String saveBook(@Valid @ModelAttribute("book") BookCreateRequest bookCreateRequest, Model model) {
         CategoryEntity categoryEntity = categoryService.getById(bookCreateRequest.getCategoryId());
         if (categoryEntity == null) {
             model.addAttribute("errorMessage", CategoryError.NOT_FOUND.getMessage());
@@ -93,7 +94,7 @@ public class BookController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateBook(@Validated @ModelAttribute("bookUpdate") BookUpdateRequest bookUpdateRequest, @PathVariable("id") long id, Model model) throws IOException {
+    public String updateBook(@Valid @ModelAttribute("bookUpdate") BookUpdateRequest bookUpdateRequest, @PathVariable("id") long id, Model model) throws IOException {
         BookEntity book = bookService.getById(id);
         if (book == null) {
             model.addAttribute("errorMessage", BookError.NOT_FOUND.getMessage());

@@ -1,5 +1,6 @@
 package org.example.request.category;
 
+
 import javax.validation.constraints.NotNull;
 
 public class CategoryUpdateRequest {

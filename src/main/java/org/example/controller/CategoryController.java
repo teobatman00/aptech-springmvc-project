@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -54,9 +55,9 @@ public class CategoryController {
     }
 
     @PostMapping("/save")
-    public String saveCategory(@Validated @ModelAttribute("category") CategoryCreateRequest categoryCreateRequest,
-                               Model model,
-                               BindingResult bindingResult) {
+    public String saveCategory(@Valid @ModelAttribute("category") CategoryCreateRequest categoryCreateRequest,
+                               BindingResult bindingResult,
+                               Model model) {
         if (bindingResult.hasErrors()) {
             return "category/create";
         }
@@ -84,7 +85,7 @@ public class CategoryController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@Validated @ModelAttribute("categoryUpdate") CategoryUpdateRequest categoryUpdateRequest,
+    public String update(@Valid @ModelAttribute("categoryUpdate") CategoryUpdateRequest categoryUpdateRequest,
                          Model model,
                          @PathVariable("id") long id) {
         CategoryEntity category = categoryService.getById(id);

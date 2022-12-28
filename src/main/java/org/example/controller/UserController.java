@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -47,7 +48,7 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public String saveUser(@Validated @ModelAttribute("user") UserEntity user) {
+    public String saveUser(@Valid @ModelAttribute("user") UserEntity user) {
         userService.saveUser(user);
         return "redirect:/category/list";
     }

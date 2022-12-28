@@ -1,5 +1,7 @@
 package org.example.request.book;
 
+
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
@@ -49,7 +51,7 @@ public class BookCreateRequest {
         return avatar;
     }
 
-    public void setAvatar(@NotNull MultipartFile avatar) {
+    public void setAvatar(MultipartFile avatar) {
         this.avatar = avatar;
     }
 

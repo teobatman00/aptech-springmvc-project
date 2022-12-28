@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <%@include file="../include/head.jsp"%>
@@ -20,16 +21,20 @@
     </header>
     <main class="container">
         <form:form method="post" action="${pageContext.request.contextPath}/category/save" modelAttribute="category">
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <form:input type="text" cssClass="form-control" id="name" placeholder="Category name" path="name" />
-                <form:errors path="name" cssClass="alert alert-danger" />
-            </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <form:textarea cssClass="form-control" id="description" rows="3" path="description" placeholder="Category description" />
-                <form:errors path="description" cssClass="alert alert-danger" />
-            </div>
+            <spring:bind path="name">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <form:input type="text" cssClass="form-control" id="name" placeholder="Category name" path="name" />
+                    <form:errors path="name" cssClass="alert alert-danger" />
+                </div>
+            </spring:bind>
+            <spring:bind path="description">
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <form:textarea cssClass="form-control" id="description" rows="3" path="description" placeholder="Category description" />
+                    <form:errors path="description" cssClass="alert alert-danger" />
+                </div>
+            </spring:bind>
             <button type="submit" class="btn btn-primary d-flex m-auto">Create</button>
         </form:form>
     </main>

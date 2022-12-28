@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
@@ -20,7 +22,7 @@ public class AuthController {
     }
 
     @GetMapping("/loginPage")
-    public String login(Model model) {
+    public String login(@Valid Model model) {
         return "auth/login";
     }
 
