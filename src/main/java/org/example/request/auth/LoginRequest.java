@@ -4,9 +4,9 @@ package org.example.request.auth;
 import javax.validation.constraints.NotNull;
 
 public class LoginRequest {
-    @NotNull
+    @NotNull(message = "username is required")
     private String userName;
-    @NotNull
+    @NotNull(message = "password is required")
     private String password;
 
     public String getUserName() {
